@@ -8,16 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.ttsproject.ui.theme.TTSProjectTheme
 import com.example.ttsproject.databinding.ActivityMainBinding
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -25,7 +16,6 @@ import androidx.core.content.ContextCompat
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,7 +29,8 @@ class MainActivity : ComponentActivity() {
     lateinit var binding: ActivityMainBinding
     private lateinit var recordButton: Button
     private lateinit var sendButton: Button
-    private lateinit var resultText: TextView
+    private lateinit var transcriptionText: TextView
+    private lateinit var translationText: TextView
 
     private var recorder: MediaRecorder? = null
     private var audioFile: File? = null
@@ -53,8 +44,8 @@ class MainActivity : ComponentActivity() {
 
         recordButton = findViewById(R.id.recordButton)
         sendButton = findViewById(R.id.sendButton)
-        resultText = findViewById(R.id.resultText)
-
+        transcriptionText = findViewById(R.id.transcriptionText)
+        translationText = findViewById(R.id.translationText)
         checkPermissions()
 
         recordButton.setOnClickListener {
@@ -136,14 +127,15 @@ class MainActivity : ComponentActivity() {
                 response: Response<TranscriptionResponse>
             ) {
                 if (response.isSuccessful) {
-                    resultText.text = response.body()?.transcription ?: "Transcription not available"
+                    transcriptionText.text = response.body()?.transcription ?: "Transcription not available"
+                    translationText.text = response.body()?.translated ?: "Translation not available"
                 } else {
-                    resultText.text = "Error: ${response.code()}"
+                    transcriptionText.text = "Error: ${response.code()}"
                 }
             }
 
             override fun onFailure(call: Call<TranscriptionResponse>, t: Throwable) {
-                resultText.text = "Failed: ${t.message}"
+                transcriptionText.text = "Failed: ${t.message}"
             }
         })
     }
