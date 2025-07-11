@@ -9,6 +9,7 @@ interface ApiService {
     @Multipart
     @POST("/transcribe/")
     fun transcribeAudio(
-        @Part file: MultipartBody.Part
+        @Part file: MultipartBody.Part,
+        @Part("target_lang") targetLang: RequestBody
     ): Call<TranscriptionResponse>
 }
