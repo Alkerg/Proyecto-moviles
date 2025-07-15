@@ -131,9 +131,6 @@ class MainActivity : ComponentActivity() {
             return
         }
 
-
-        //Toast.makeText(this, "Lenguaje seleccionado: ", Toast.LENGTH_SHORT).show()
-
         val client = OkHttpClient()
         val retrofit = Retrofit.Builder()
             .baseUrl("https://alkerg-stt-project.hf.space")
@@ -159,8 +156,8 @@ class MainActivity : ComponentActivity() {
                 response: Response<TranscriptionResponse>
             ) {
                 if (response.isSuccessful) {
-                    transcriptionText.text = response.body()?.transcription ?: "Transcription not available"
-                    translationText.text = response.body()?.translated ?: "Translation not available"
+                    transcriptionText.text = response.body()?.transcription ?: "Transcripción no disponible"
+                    translationText.text = response.body()?.translated ?: "Traducción no disponible"
                 } else {
                     transcriptionText.text = "Error: ${response.code()}"
                 }
