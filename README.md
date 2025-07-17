@@ -1,11 +1,11 @@
-# STT mobile project
+# Speech to text (STT) - Proyecto movil
 
-# About this project
-This is a mobile application that converts audio to text and translates it into specified language (currently only English and French)
+# Sobre este proyecto
+Esta es una aplicación móvil que convierte audio en texto y lo traduce al idioma especificado (actualmente solo inglés y francés)
 
-# Development
-The application was developed using Android Studio and the Kotlin programming language.
-For the audio conversion to text, the ```OpenAI Whisper``` model was used and the ```Helsinki NLP``` model was used for translation.
-The application backend, including AI models, was developed using Fastapi and deployed in ```Hugging Face```
+# Desarrollo
+La aplicación se desarrolló con Android Studio y el lenguaje de programación Kotlin.
+Para la conversión de audio a texto, se utilizó el modelo ```OpenAI Whisper``` y el modelo ```Helsinki NLP``` para la traducción.
+El backend de la aplicación, incluyendo los modelos de IA, se desarrolló con Fastapi y se implementó en ```Hugging Face```.
 
 ![Backend design](https://i.ibb.co/N6P6SBYZ/Untitled-2025-07-14-0256.png)
